@@ -1,12 +1,15 @@
-1. Java là ngôn ngữ lập trình Pass by Value hay Pass by Reference ?
-   Java là ngôn ngữ lập trình Pass by Value (truyền tham trị).
+Câu hỏi: Thay vì sử dụng Comparator để so sánh các mục trong giỏ hàng, chúng ta có thể sử dụng interface Comparable và ghi đè phương thức compareTo(). Bạn có thể tham khảo tài liệu Java để xem thông tin về interface này.
+Giả sử chúng ta đang sử dụng phương pháp interface Comparable.
 
-2. Tại sao sau khi gọi `swap(jungleDVD, cinderellaDVD)` tiêu đề của hai đối tượng này vẫn không thay đổi?  
-   Sau khi gọi `swap(jungleDVD, cinderellaDVD)`, tiêu đề của chúng vẫn không thay đổi vì phương thức này chỉ hoán đổi các giá trị của trường `title`, chứ không phải các tham chiếu của đối tượng.  
-   Tham chiếu `jungleDVD` và `cinderellaDVD` vẫn trỏ đến các đối tượng ban đầu, vì vậy bản thân các đối tượng không thay đổi, chỉ các giá trị trong trường `title` được hoán đổi.
+Lớp nào nên triển khai interface Comparable?
+    Lớp Media nên triển khai interface Comparable.
 
-3. Tại sao sau khi gọi `changeTitle(jungleDVD, cinderellaDVD.getTitle())`, tiêu đề của `jungleDVD` lại thay đổi?  
-   Tiêu đề của `jungleDVD` thay đổi vì phương thức `changeTitle()` trực tiếp thay đổi trường `title` của đối tượng bằng giá trị từ `cinderellaDVD.getTitle()`.
+Phương thức compareTo() nên được triển khai như thế nào trong các lớp này để phản ánh thứ tự mong muốn?
+    Bạn có thể tìm thấy chi tiết triển khai trong tệp `Media.java`.
 
-4. Viết phương thức `toString()` cho lớp `DigitalVideoDisc`. Kiểu trả về của phương thức này nên là gì?  
-   Kiểu trả về của phương thức nên là String.
+Liệu có thể có hai quy tắc sắp xếp khác nhau cho các mục (ví dụ: theo tiêu đề rồi đến chi phí, và theo chi phí rồi đến tiêu đề) khi sử dụng phương pháp interface Comparable không?
+    Không, điều đó là không thể. Interface Comparable chỉ hỗ trợ một thứ tự tự nhiên cho các đối tượng.
+
+Nếu DVD có một quy tắc sắp xếp khác so với các loại media khác, chẳng hạn như theo tiêu đề, sau đó theo chiều dài giảm dần, rồi đến chi phí, bạn sẽ thay đổi mã của mình như thế nào để phù hợp với điều này?
+    Bạn có thể ghi đè phương thức compareTo trong lớp Disc để triển khai quy tắc sắp xếp mới.
+    Mã thay đổi có thể được tìm thấy trong tệp `Disc.java`.
