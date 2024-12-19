@@ -64,4 +64,8 @@ public class Store {
             System.out.println("No media found with title: " + title);
         }
     }
+
+    public ArrayList<Media> getItemsInStore() {
+        return itemsInStore;
+    }
 }
