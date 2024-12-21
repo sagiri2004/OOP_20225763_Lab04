@@ -40,9 +40,14 @@ public class StoreScreen extends JFrame {
 
         JMenu menu = new JMenu("Options");
         JMenu smUpdateStore = new JMenu("Update Store");
+
         smUpdateStore.add(new JMenuItem("Add Book"));
         smUpdateStore.add(new JMenuItem("Add CD"));
         smUpdateStore.add(new JMenuItem("Add DVD"));
+
+        smUpdateStore.getItem(0).addActionListener(e -> new AddBookToStoreScreen().setVisible(true));
+        smUpdateStore.getItem(1).addActionListener(e -> new AddCompactDiscToStoreScreen().setVisible(true));
+        smUpdateStore.getItem(2).addActionListener(e -> new AddDigitalVideoDiscToStoreScreen().setVisible(true));
 
         menu.add(smUpdateStore);
         menu.add(new JMenuItem("View store"));
@@ -60,17 +65,23 @@ public class StoreScreen extends JFrame {
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
         title.setForeground(Color.CYAN);
 
-        JButton cart = new JButton("View cart");
-        cart.setPreferredSize(new Dimension(100, 50));
-        cart.setMaximumSize(new Dimension(100, 50));
+        JButton cartButton = new JButton("View cart");
+        cartButton.setPreferredSize(new Dimension(100, 50));
+        cartButton.setMaximumSize(new Dimension(100, 50));
+
+        cartButton.addActionListener(e -> openCartScreen());
 
         header.add(Box.createRigidArea(new Dimension(10, 0)));
         header.add(title);
         header.add(Box.createHorizontalGlue());
-        header.add(cart);
+        header.add(cartButton);
         header.add(Box.createRigidArea(new Dimension(10, 0)));
 
         return header;
+    }
+
+    private void openCartScreen() {
+        new CartScreen(store.getCart());
     }
 
     private JPanel createCenter() {
@@ -86,27 +97,32 @@ public class StoreScreen extends JFrame {
         return center;
     }
 
+    public void updateStoreDisplay() {
+        Container cp = getContentPane();
+        cp.removeAll();
+
+        cp.add(createNorth(), BorderLayout.NORTH);
+        cp.add(createCenter(), BorderLayout.CENTER);
+
+        revalidate();
+        repaint();
+    }
+
     public static void init() {
-        // Initialize the store with sample data
         store = new Store();
 
-        // Add sample Books
         store.addMedia(new Book(1, "Harry Potter", "Fantasy", 19.99f));
         store.addMedia(new Book(2, "The Hobbit", "Adventure", 15.99f));
 
-        // Add sample DigitalVideoDiscs
         store.addMedia(new DigitalVideoDisc("The Lord of the Rings", "Fantasy", "Peter Jackson", 149, 24.99f));
         store.addMedia(new DigitalVideoDisc("Star Wars", "Sci-Fi", "George Lucas", 124, 22.99f));
 
-        // Add sample CompactDiscs
         store.addMedia(new CompactDisc(3, "Thriller", "Pop", 14.99f, 42, "Quincy Jones", "Michael Jackson"));
         store.addMedia(new CompactDisc(4, "Back in Black", "Rock", 17.99f, 40, "Mutt Lange", "AC/DC"));
 
-        // Create and display the StoreScreen
-        new StoreScreen(store);
+        StoreScreen storeScreen = new StoreScreen(store);
+        storeScreen.updateStoreDisplay();
     }
-
-
 
     public static void main(String[] args) {
         init();

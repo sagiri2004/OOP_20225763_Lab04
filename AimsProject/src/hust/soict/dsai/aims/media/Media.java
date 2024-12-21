@@ -1,5 +1,7 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 import java.util.Comparator;
 
 public abstract class Media {
@@ -55,4 +57,24 @@ public abstract class Media {
         return "Media [id=" + id + ", title=" + title + ", category=" + category + ", cost=" + cost + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Media otherMedia = (Media) obj;
+
+        return this.title != null && this.title.equals(otherMedia.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return title != null ? title.hashCode() : 0;
+    }
+
+    public abstract void play() throws PlayerException;
 }

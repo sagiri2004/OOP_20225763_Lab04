@@ -1,5 +1,7 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 import java.util.ArrayList;
 
 public class CompactDisc extends Disc implements Playable {
@@ -46,11 +48,12 @@ public class CompactDisc extends Disc implements Playable {
     }
 
     @Override
-    public void play() {
-        System.out.println("Playing CD: " + this.getTitle());
-        System.out.println("Artist: " + this.getArtist());
-        for (Track track : tracks) {
-            track.play();
+    public void play() throws PlayerException {
+        if (getLength() <= 0) {
+            throw new PlayerException("Invalid CD length.");
         }
+        System.out.println("Playing CD: " + getTitle());
+        System.out.println("Director: " + getDirector());
+        System.out.println("Length: " + getLength() + " minutes");
     }
 }

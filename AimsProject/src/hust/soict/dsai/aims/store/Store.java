@@ -1,13 +1,16 @@
 package hust.soict.dsai.aims.store;
 
+import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import java.util.ArrayList;
 
 public class Store {
     private ArrayList<Media> itemsInStore;
+    private Cart cart; // Đối tượng Cart cho store
 
     public Store() {
         this.itemsInStore = new ArrayList<>();
+        this.cart = new Cart(); // Khởi tạo giỏ hàng khi tạo cửa hàng
     }
 
     public void addMedia(Media media) {
@@ -67,5 +70,10 @@ public class Store {
 
     public ArrayList<Media> getItemsInStore() {
         return itemsInStore;
+    }
+
+    // Trả về giỏ hàng của cửa hàng
+    public Cart getCart() {
+        return cart;
     }
 }

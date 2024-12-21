@@ -13,7 +13,7 @@ public class Book extends Media {
         if (!authors.contains(authorName)) {
             authors.add(authorName);
         } else {
-            System.out.println("Tác giả đã tồn tại trong danh sách.");
+            System.out.println("Author already exists in the list.");
         }
     }
 
@@ -21,12 +21,20 @@ public class Book extends Media {
         if (authors.contains(authorName)) {
             authors.remove(authorName);
         } else {
-            System.out.println("Tác giả không tồn tại trong danh sách.");
+            System.out.println("Author does not exist in the list.");
         }
     }
 
     @Override
     public String toString() {
         return "Book [id=" + getId() + ", title=" + getTitle() + ", category=" + getCategory() + ", cost=" + getCost() + ", authors=" + authors + "]";
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Opening the book: " + getTitle());
+        System.out.println("Category: " + getCategory());
+        System.out.println("Authors: " + String.join(", ", authors));
+        System.out.println("Happy reading!");
     }
 }

@@ -1,5 +1,7 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 public class DigitalVideoDisc extends Disc implements Playable {
     public static int nbDigitalVideoDiscs = 0;
 
@@ -20,22 +22,22 @@ public class DigitalVideoDisc extends Disc implements Playable {
 
     @Override
     public String getDirector() {
-        return super.getDirector();  
+        return super.getDirector();
     }
 
     @Override
     public void setDirector(String director) {
-        super.setDirector(director); 
+        super.setDirector(director);
     }
 
     @Override
     public int getLength() {
-        return super.getLength();  
+        return super.getLength();
     }
 
     @Override
     public void setLength(int length) {
-        super.setLength(length);  
+        super.setLength(length);
     }
 
     @Override
@@ -52,8 +54,12 @@ public class DigitalVideoDisc extends Disc implements Playable {
     }
 
     @Override
-    public void play() {
-        System.out.println("Playing DVD: " + this.getTitle());
-        System.out.println("DVD length: " + this.getLength());
+    public void play() throws PlayerException {
+        if (getLength() <= 0) {
+            throw new PlayerException("Invalid CD length.");
+        }
+        System.out.println("Playing CD: " + getTitle());
+        System.out.println("Director: " + getDirector());
+        System.out.println("Length: " + getLength() + " minutes");
     }
 }
